@@ -12,7 +12,7 @@
 * build your project `yarn release` or `npm run release`
 
 ## Builds
-This starter prepares 2 different versions for builds of your lib
+This starter prepares 2 different types of builds of your lib
 * **esm** or ES2015 Modules
   * this build is a transpilation of your Typescript code to ES5 and ES2015 modules. Its' not bundled. This is needed for treeshaking when users use your lib
 * **UMD**
