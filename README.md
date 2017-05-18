@@ -1,5 +1,5 @@
 # Angular Lib Starter
-> Universal, AOT, Web Workers, ready lib starter. Use for your Angular libs
+> Universal, AOT, Web Worker ready lib starter. Use for your Angular libs
 
 
 ## Getting started
