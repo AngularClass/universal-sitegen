@@ -1,4 +1,4 @@
-# Angular Lib starter
+# Angular Lib Starter
 > Universal, AOT, Web Workers, ready lib starter. Use for your Angular libs
 
 
