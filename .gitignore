@@ -1,0 +1,10 @@
+node_modules
+*.log
+*.tmp
+DS*
+typings
+dist
+.vscode
+*.pid
+*.seed
+build/Release
