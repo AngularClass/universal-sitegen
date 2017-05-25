@@ -13,7 +13,9 @@
     "build:aot": "ngc",
     "build": "rimraf build && npm run build:esm && npm run build:bundle && npm run build:aot",
     "copy": "cp package.json dist && cp README.md dist",
-    "release": "npm run build && npm run copy"
+    "release": "npm run build && npm run copy",
+    "pack": "npm pack ./dist",
+    "publish": "npm publish ./dist"
   },
   "license": "MIT",
   "devDependencies": {
