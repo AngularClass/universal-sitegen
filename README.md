@@ -29,3 +29,5 @@ The build system generates AOT metadata too, so you're good.
 * `"build"`: does all the above
 * `"copy"`: copies over file to dist
 * `"release"`: does all the above
+* `"pack"`: produces a tarball
+* `"publish"`: publishes the library to NPM
