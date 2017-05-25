@@ -4,7 +4,7 @@
   "description": "Starter to make Angular libs",
   "main": "bundle.js",
   "jsnext:main": "lib.module.js",
-  "module": "lib.module.js",
+  "module": "index.js",
   "types": "index.d.ts",
   "scripts": {
     "tslint": "tslint \"src/**/*.ts\"",
