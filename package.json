@@ -13,7 +13,7 @@
     "build:aot": "ngc",
     "build": "rimraf build && npm run build:esm && npm run build:bundle && npm run build:aot",
     "copy": "cp package.json dist && cp README.md dist",
-    "release": "npm run build && npm run copy"
+    "release": "rimraf dist && npm run build && npm run copy"
   },
   "license": "MIT",
   "devDependencies": {
