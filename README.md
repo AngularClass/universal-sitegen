@@ -23,11 +23,13 @@ The build system generates AOT metadata too, so you're good.
 
 ## Scripts
 * `"test"`: runs the test in mocha on node
+* `"lint"`: runs the linter
 * `"build:esm"`: builds the esm versions
 * `"build:bundle"`: builds the UMD version
 * `"build:aot"`: makes it work for aot
 * `"build"`: does all the above
 * `"copy"`: copies over file to dist
-* `"release"`: does all the above
+* `"package"`: does all the above
+* `"release"`: bumps the version, creates a tag, pushes to your master, builds then publiseh to npm
 * `"pack"`: produces a tarball
-* `"publish"`: publishes the library to NPM
+* `"coverage"`: runs the test then coverage

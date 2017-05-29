@@ -20,12 +20,13 @@
       "./node_modules"
     ],
     "types": [
-      "node",
-      "mocha",
-      "chai"
+      "node"
     ]
   },
-  "files": [
-    "./src/index.ts"
+  "exclude": [
+    "./src/**/*.spec.ts"
+  ],
+  "include": [
+    "./src/**/*.ts"
   ]
 }

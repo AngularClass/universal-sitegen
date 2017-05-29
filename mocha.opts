@@ -3,4 +3,4 @@
 --ui bdd
 --glob *.spec.ts
 --recursive
-src
+src/**/*.ts
