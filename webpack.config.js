@@ -1,5 +1,6 @@
 const webpack = require('webpack')
 const path = require('path')
+
 const root = (_path) => {
   return path.resolve(__dirname, _path)
 }
@@ -10,12 +11,13 @@ module.exports = (envOptions = {}) => {
     entry: root('./src/index.ts'),
     output: {
       path: root('dist'),
-      filename: 'bundle.js'
+      filename: 'universal-sitegen.js'
     },
-    target: 'web',
+    target: 'node',
+
     externals: [moduleExternals()],
     resolve: {
-      extensions: ['.ts', '.js', '.html', '.scss', '.css'],
+      extensions: ['.ts', '.js'],
     },
     module: {
       rules: [
@@ -25,7 +27,7 @@ module.exports = (envOptions = {}) => {
             {
               loader: 'awesome-typescript-loader',
               options: {
-                declaration: false
+                configFileName: root('tsconfig.json')
               }
             },
             'angular2-template-loader'
@@ -35,29 +37,16 @@ module.exports = (envOptions = {}) => {
         {
           test: /\.html$/,
           loader: 'raw-loader'
-        },
-        {
-          test: /\.gql$/,
-          loader: 'graphql-tag/loader'
-        },
-        {
-          test: /\.scss$/,
-          use: [
-            'to-string-loader',
-            'css-loader',
-            'postcss-loader',
-            'sass-loader'
-          ]
         }
       ]
     },
     plugins: [
       new webpack.ContextReplacementPlugin(
-        /angular(\\|\/)core(\\|\/)@angular/,
-        root('src'), // location of your src
-        {
-          // your Angular Async Route paths relative to this root directory
-        }
+        /angular(\\|\/)core(\\|\/)@angular/
+         // location of your src
+        // {
+        //   // your Angular Async Route paths relative to this root directory
+        // }
       )
     ]
   })
