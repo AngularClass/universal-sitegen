@@ -3,7 +3,8 @@
     "skipTemplateCodegen": true
   },
   "compilerOptions": {
-    "declaration": true,
+    "declaration": false,
+    "moduleResolution": "node",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "lib": [
@@ -23,10 +24,7 @@
       "node"
     ]
   },
-  "exclude": [
-    "./src/**/*.spec.ts"
-  ],
-  "include": [
-    "./src/**/*.ts"
+  "files": [
+    "./server.ts"
   ]
 }
