@@ -1,9 +1,9 @@
 {
-  "name": "angular-lib-starter",
-  "version": "0.0.1",
+  "name": "@angularclass/universal-sitegen",
+  "version": "0.0.2",
   "description": "Starter to make Angular libs",
-  "main": "bundle.js",
-  "jsnext:main": "lib.module.js",
+  "main": "universal-sitegen.js",
+  "jsnext:main": "index.js",
   "module": "index.js",
   "types": "index.d.ts",
   "scripts": {
@@ -13,7 +13,7 @@
     "build:esm": "ntsc -p tsconfig.esm.json",
     "build:bundle": "webpack --progress --colors",
     "build:aot": "ngc",
-    "build": "rimraf build && npm run tslint && npm run build:esm && npm run build:bundle && npm run build:aot",
+    "build": "rimraf build && npm run tslint && npm run build:esm && npm run build:bundle",
     "copy": "cp package.json dist && cp README.md dist",
     "pack": "npm pack ./dist",
     "package": "npm run build && npm run copy",
