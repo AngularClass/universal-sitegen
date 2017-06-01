@@ -1,7 +1,9 @@
 import 'core-js'
 import 'zone.js/dist/zone-node'
-import { renderModuleFactory } from '@angular/platform-server'
-import { NgModuleFactory, enableProdMode } from '@angular/core'
+import { renderModule } from '@angular/platform-server'
+import {  enableProdMode, Type } from '@angular/core'
+// import * as path from 'path'
+import { SiteGenConfig } from './interfaces'
 
 enableProdMode()
 
@@ -12,11 +14,17 @@ enableProdMode()
  * @param url the url to the page
  */
 export function site (
-  serverModuleFactory: NgModuleFactory<{}>,
+  serverModuleFactory: Type<{}>,
   document: string,
-  url: string = '/'
+  url: string = '/',
+  config?: string | SiteGenConfig
 ) {
-  return renderModuleFactory(
+  // if (typeof config === 'string') {
+  //   config = require.resolve(path.join(process.cwd(), config))
+  // }
+
+  // console.log('config here ', config)
+  return renderModule(
     serverModuleFactory,
     {document, url}
   )
