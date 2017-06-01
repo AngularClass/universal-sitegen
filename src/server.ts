@@ -1,15 +1,24 @@
 import 'core-js'
 import 'zone.js/dist/zone-node'
-import { renderModule } from '@angular/platform-server'
-import { Type } from '@angular/core'
+import { renderModuleFactory } from '@angular/platform-server'
+import { NgModuleFactory, enableProdMode } from '@angular/core'
 
-// enableProdMode()
+enableProdMode()
 
 /**
- * @param addModule the server module
- * @param indexFile the index file to yor app. The HTML string
+ * compiles and creates a HTML string from an angular app
+ * @param serverModuleFactory the NgFactoryModule from your AOT built server module
+ * @param document the index.html string
+ * @param url the url to the page
  */
-export function site (appModule: Type<any>, indexFile: string) {
-  return renderModule(appModule, {document: indexFile, url: '/'})
+export function site (
+  serverModuleFactory: NgModuleFactory<{}>,
+  document: string,
+  url: string = '/'
+) {
+  return renderModuleFactory(
+    serverModuleFactory,
+    {document, url}
+  )
 }
 
