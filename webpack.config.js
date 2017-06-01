@@ -15,9 +15,20 @@ module.exports = (envOptions = {}) => {
     },
     target: 'node',
 
-    externals: [moduleExternals()],
+    externals: [moduleExternals({
+      whitelist: [
+        'progress',
+        'chalk',
+        'prettysize'
+      ]
+    })],
     resolve: {
       extensions: ['.ts', '.js'],
+      alias: {
+        progress: 'progress',
+        chalk: 'chalk',
+        prettysize: 'prettysize'
+      }
     },
     module: {
       rules: [
