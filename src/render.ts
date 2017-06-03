@@ -26,7 +26,6 @@ export async function renderPage (
 ) {
 
   let renderFunc
-  console.log(serverModuleOrFactory.constructor)
 
   if (serverModuleOrFactory instanceof NgModuleFactory) {
     renderFunc = render(renderModuleFactory)
