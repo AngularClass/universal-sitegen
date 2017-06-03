@@ -13,13 +13,17 @@
     "build:esm": "ntsc -p tsconfig.esm.json",
     "build:bundle": "webpack --progress --colors",
     "build:aot": "ngc",
-    "build": "rimraf build && npm run tslint && npm run build:esm && npm run build:bundle",
+    "build:cli": "ntsc -p tsconfig.cli.json",
+    "build": "rimraf build && npm run tslint && npm run build:esm && npm run build:bundle && npm run build:cli",
     "copy": "cp package.json dist && cp README.md dist",
     "pack": "npm pack ./dist",
     "package": "npm run build && npm run copy",
     "tags": "git add . && git push origin master && git push --tags",
     "bump": "npm version patch -m\"upgrade to %s\"",
     "release": "npm run bump && npm run tags && npm run package && npm publish dist/ --access public"
+  },
+  "bin": {
+    "universal": "./cli/cli.js"
   },
   "license": "MIT",
   "devDependencies": {
@@ -31,6 +35,8 @@
     "@angular/platform-browser-dynamic": "^4.1.3",
     "@angular/platform-server": "^4.1.3",
     "@types/chai": "^3.5.2",
+    "@types/chalk": "^0.4.31",
+    "@types/commander": "^2.9.0",
     "@types/mocha": "^2.2.41",
     "@types/node": "^7.0.18",
     "@types/sinon": "^2.2.2",
@@ -60,6 +66,7 @@
     "@angular/animations": "^4.1.3",
     "@angular/http": "^4.1.3",
     "chalk": "^1.1.3",
+    "commander": "^2.9.0",
     "css-loader": "^0.28.1",
     "postcss-loader": "^2.0.5",
     "prettysize": "^0.1.0",

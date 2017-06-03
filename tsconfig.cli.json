@@ -1,0 +1,32 @@
+{
+  "angularCompilerOptions": {
+    "skipTemplateCodegen": true
+  },
+  "compilerOptions": {
+    "declaration": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "lib": [
+      "es2015",
+      "dom"
+    ],
+    "module": "commonjs",
+    "outDir": "./dist/cli",
+    "sourceMap": true,
+    "rootDir": "./src",
+    "stripInternal": true,
+    "target": "es5",
+    "typeRoots": [
+      "./node_modules/@types",
+      "./node_modules"
+    ],
+    "types": [
+      "node",
+      "commander",
+      "chalk"
+    ]
+  },
+  "files": [
+    "./src/cli.ts"
+  ]
+}
