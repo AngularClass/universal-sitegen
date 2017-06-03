@@ -20,7 +20,8 @@ module.exports = (envOptions = {}) => {
       whitelist: [
         'progress',
         'chalk',
-        'prettysize'
+        'prettysize',
+        'fs-extra'
       ]
     })],
     resolve: {
@@ -28,7 +29,8 @@ module.exports = (envOptions = {}) => {
       alias: {
         progress: 'progress',
         chalk: 'chalk',
-        prettysize: 'prettysize'
+        prettysize: 'prettysize',
+        'fs-extra': 'fs-extra'
       }
     },
     module: {

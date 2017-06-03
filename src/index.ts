@@ -1,6 +1,6 @@
 import { renderPage } from './render'
 import { NgModuleFactory, enableProdMode, Type } from '@angular/core'
-import { loadConfigFile } from './file'
+import { loadConfigFile, createHTML } from './file'
 import { SiteGenConfig } from './interfaces'
 // import { createFile } from './file'
 import { Observable} from 'rxjs'
@@ -43,6 +43,7 @@ export const generateSite = async (
   .do((page) => bar.tick({
     url: page.url
   }))
+  .do((page) => createHTML(page.html, page.url, configOptions))
   .subscribe((page) => {
     const bytes = Buffer.byteLength(page.html, 'utf8')
     console.log(chalk.green(`built ${page.url} ${prettysize(bytes, true)}`))

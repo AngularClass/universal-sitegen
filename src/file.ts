@@ -1,8 +1,9 @@
 import { SiteGenConfig } from './interfaces'
-import * as fs from 'fs'
 import * as path from 'path'
+const fs = require('fs-extra')
 
-export const createFile = (html: string, url: string, config: SiteGenConfig) => {
+
+export const createHTML = (html: string, url: string, config: SiteGenConfig) => {
   let filePath = path.join(process.cwd(), config.outputPath)
 
   if (config.dotHTML) {
@@ -11,15 +12,8 @@ export const createFile = (html: string, url: string, config: SiteGenConfig) => 
     filePath = path.join(filePath, url,  'index.html')
   }
 
-  return new Promise((res, rej) => {
-    fs.writeFile(filePath, html, 'utf8', err => {
-      if (err) {
-        return rej(err)
-      } else {
-        res(filePath)
-      }
-    })
-  })
+  console.log(filePath)
+  return fs.outputFile(filePath, html)
 }
 
 export const loadConfigFile = (pathToFile: string): Promise<string> => {
