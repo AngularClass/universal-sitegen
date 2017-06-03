@@ -4,6 +4,7 @@ const path = require('path')
 const root = (_path) => {
   return path.resolve(__dirname, _path)
 }
+
 const moduleExternals = require('webpack-node-externals')
 
 module.exports = (envOptions = {}) => {
@@ -34,15 +35,12 @@ module.exports = (envOptions = {}) => {
       rules: [
         {
           test: /\.ts$/,
-          loaders: [
-            {
-              loader: 'awesome-typescript-loader',
-              options: {
-                configFileName: root('tsconfig.json')
-              }
-            },
-            'angular2-template-loader'
-          ],
+          loaders: [{
+            loader: 'awesome-typescript-loader',
+            options: {
+              configFileName: root('tsconfig.json')
+            }
+          }],
           exclude: [/node_modules/, /\.spec\.ts$/]
         },
         {

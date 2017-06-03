@@ -6,3 +6,10 @@ export interface SiteGenConfig {
   /** where to place the output of the files. defaults to ./universal-site */
   outputPath: string
 }
+
+export interface CLIConfig extends SiteGenConfig {
+  /** the path to the ngmodule or factor */
+  serverModuleOrFactoryPath: string
+  /** the path  to the index.html */
+  indexHTMLPath: string
+}
