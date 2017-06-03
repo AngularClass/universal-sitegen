@@ -8,6 +8,10 @@ import { CLIConfig } from './interfaces'
 import { NgModuleFactory, Type } from '@angular/core'
 const pjson = require('../package.json')
 
+/**
+ * takes a path to a file and returns the content async
+ * @param pathToFile full path to the file to read
+ */
 const readFile = (pathToFile: string): Promise<string> => {
   return new Promise((res, rej) => {
     fs.readFile(pathToFile, 'utf8', (err, file) => {
@@ -20,18 +24,32 @@ const readFile = (pathToFile: string): Promise<string> => {
   })
 }
 
+/**
+ * finds and parses the universal config file
+ * @param config path to the config file to read
+ */
 const getConfig = async (config = './universal.json'): Promise<CLIConfig> => {
   const configPath = path.join(process.cwd(), config)
   const file = await readFile(configPath)
 
   try {
-    return JSON.parse(file)
+    const options = JSON.parse(file)
+    return Object.assign(options, {
+      indexHTMLPath: './src/index.html',
+      dotHTML: false,
+      outputPath: 'site'
+    })
   } catch (e) {
     console.error(new Error('Config file has invalid JSON'))
     process.exit(1)
   }
 }
 
+/**
+ * requires the ngModule or ngModuleFactory for the universal app
+ * @param pathToModule path to the serverModule or
+ *                     serverModuleFactory in the format of "./path/to/file#ExportName"
+ */
 const getModule = (pathToModule: string): Type<{}> | NgModuleFactory<{}> => {
   if (!pathToModule) {
     console.log(chalk.red('Must provide a path to the NgModule or Factory'))
@@ -52,6 +70,10 @@ const getModule = (pathToModule: string): Type<{}> | NgModuleFactory<{}> => {
 }
 
 
+/**
+ * builds the entire site. Hooked into commander for the "build" command
+ * @param config commander config
+ */
 const build = async (config) => {
   const configOptions = (await getConfig(config.config) as CLIConfig)
   const serverModule = getModule(configOptions.serverModuleOrFactoryPath)
@@ -61,7 +83,6 @@ const build = async (config) => {
     await readFile(path.join(process.cwd(), configOptions.indexHTMLPath)),
     configOptions
   )
-
 }
 
 program.version(pjson.version)
