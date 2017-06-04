@@ -107,7 +107,7 @@ To build your site with the CLI (preffered), you only need to do a few things.
 
 Create a config file with these options:
 
-```json
+```js
 {
   // routes for your angular app. mirros your routes file
   "routes": [
