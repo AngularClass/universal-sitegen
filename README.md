@@ -66,32 +66,6 @@ import { AppModule } from './app.module'
 export class AppServerModule {}
 ```
 
-Finally, you need to create an entry file for the site generator
-
-```typescript
-// static.ts
-import { generateSite } from '@angularclass/universal-sitegen'
-import { AppServerModule } from './server.module'
-
-generateSite(
-  // NgModule or NgModuleFactory for the ServerModule you created
-  AppServerModule,
-  // index html file for all routes
-  require('./index.html'),
-  // options object
-  {
-    // routes for your app
-    routes: [
-      '/',
-      '/about'
-    ],
-    // path to output the site
-    outputPath: 'universal-site'
-  }
-)
-.then(() => console.log('site built'))
-```
-
 There is a [Demo App](https://github.com/angularclass/universal-sitegen/tree/master/demo) that has the basics. Great place to start to getting your app ready.
 
 #### CLI
@@ -132,4 +106,38 @@ The `universal build` command will build your app as a static site, and output t
 
 
 #### Progmatically
-**comming soon**
+Follow the common steps above first. You need to create an entry file for the site generator:
+
+```typescript
+// static.ts
+import { generateSite } from '@angularclass/universal-sitegen'
+import { AppServerModule } from './server.module'
+
+generateSite(
+  // NgModule or NgModuleFactory for the ServerModule you created
+  AppServerModule,
+  // index html file for all routes
+  require('./index.html'),
+  // options object
+  {
+    // routes for your app
+    routes: [
+      '/',
+      '/about'
+    ],
+    // path to output the site
+    outputPath: 'universal-site'
+  }
+)
+.then(() => console.log('site built'))
+```
+
+Once that is done, build your app like you normally would. Because your static app will over ever be ran in Node, you can change your webpack config. Check out the [demo webpack config](https://github.com/angularclass/universal-sitegen/tree/master/demo/webpack.config.js)
+
+After you build it, all you have to do is execute the bundled file.
+
+```
+node dist/bundle.js
+```
+
+This will generate your static site.
