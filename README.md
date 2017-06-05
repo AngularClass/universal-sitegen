@@ -9,7 +9,7 @@
     - [Installation](#installation)
     - [Building your static site](#building-your-static-site)
       - [CLI](#cli)
-      - [Progmatically](#progmatically)
+      - [Programmatically](#programmatically)
 
 <!-- /TOC -->
 
@@ -24,7 +24,7 @@ Ever wanted to make a static site from your Angular app? Now that we have finalz
 ### Building your static site
 There are two ways to build your site:
 * [CLI](#cli)
-* [Progmatically](#progmatically)
+* [Programmatically](#programmatically)
 
 No matter what approach you use, you need the following setup before you're ready to go.
 
@@ -105,7 +105,7 @@ After that is all done, add a `script` in your `package.json` to build the stati
 The `universal build` command will build your app as a static site, and output the html files to the outpath you specified in `universal.json`.
 
 
-#### Progmatically
+#### Programmatically
 Follow the common steps above first. You need to create an entry file for the site generator:
 
 ```typescript
@@ -141,3 +141,16 @@ node dist/bundle.js
 ```
 
 This will generate your static site.
+
+___
+
+enjoy — **AngularClass**
+
+<br><br>
+
+[![AngularClass](https://cloud.githubusercontent.com/assets/1016365/9863770/cb0620fc-5af7-11e5-89df-d4b0b2cdfc43.png  "Angular Class")](https://angularclass.com)
+## [AngularClass](https://angularclass.com)
+> Learn AngularJS, Angular, and Modern Web Development from the best.
+> Looking for corporate Angular training, want to host us, or Angular consulting? patrick@angularclass.com
+
+___
