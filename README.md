@@ -41,8 +41,8 @@ and your routes. As it should.
     BrowserModule.withServerTransition({ appId: 'my-site' }),
     ROUTES
   ],
-  // desclarations
-  // proviiders
+  // declarations
+  // providers
   // bootstrap
 })
 
