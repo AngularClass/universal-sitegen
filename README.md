@@ -1,5 +1,5 @@
 # Universal Sitegen
-> A Angular Universal static site generator
+> An Angular Universal static site generator
 
 <!-- TOC -->
 
