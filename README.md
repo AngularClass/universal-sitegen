@@ -8,8 +8,8 @@
   - [Getting started](#getting-started)
     - [Installation](#installation)
     - [Building your static site](#building-your-static-site)
-      - [Progmatically](#progmatically)
       - [CLI](#cli)
+      - [Progmatically](#progmatically)
 
 <!-- /TOC -->
 
@@ -23,36 +23,34 @@ Ever wanted to make a static site from your Angular app? Now that we have finalz
 
 ### Building your static site
 There are two ways to build your site:
+* [CLI](#cli)
+* [Progmatically](#progmatically)
 
-#### Progmatically
-First, create a `ServerModule` That imports your main app module.
+No matter what approach you use, you need the following setup before you're ready to go.
+
+First, make sure your AppModule is importing `BrowserModule.withServerTransition()`
+and your routes. As it should.
 
 ```typescript
 // app.module.ts
-import { NgModule } from '@angular/core'
-import { BrowserModule } from '@angular/platform-browser'
-import { HomeComponent } from './home'
-import { App } from './app.component'
-import { AboutView } from './about/about.component'
-import { ROUTES } from './app.routes'
+
+// .....imports
 
 @NgModule({
   imports: [
-    BrowserModule.withServerTransition({ appId: 'test' }),
+    BrowserModule.withServerTransition({ appId: 'my-site' }),
     ROUTES
   ],
-  declarations: [
-    HomeComponent,
-    AboutView,
-    App
-  ],
-  bootstrap: [App]
+  // desclarations
+  // proviiders
+  // bootstrap
 })
 
 export class AppModule {}
 ```
 
-This is what you need to make that you probably don't have already
+Next, create a ServerModule for Universal, and import your AppModule
+
 ```typescript
 // server.module.ts
 import { NgModule } from '@angular/core'
@@ -68,44 +66,41 @@ import { AppModule } from './app.module'
 export class AppServerModule {}
 ```
 
-Next, you need to create an entry for the site generator
+Finally, you need to create an entry file for the site generator
 
 ```typescript
 // static.ts
 import { generateSite } from '@angularclass/universal-sitegen'
 import { AppServerModule } from './server.module'
 
-generateSite(AppServerModule, (require('./index.html') as string), {
-  routes: [
-    '/',
-    '/about'
-  ],
-  outputPath: 'universal-site'
-})
+generateSite(
+  // NgModule or NgModuleFactory for the ServerModule you created
+  AppServerModule,
+  // index html file for all routes
+  require('./index.html'),
+  // options object
+  {
+    // routes for your app
+    routes: [
+      '/',
+      '/about'
+    ],
+    // path to output the site
+    outputPath: 'universal-site'
+  }
+)
 .then(() => console.log('site built'))
 ```
 
-* `generateSite()`
-  * Takes either your Server `NgModule` or, for prod, your Server `NgModuleFactory`
-  * The index html string
-  * options arg
-    * `routes`: all your angular routes
-    * `outputPath`: where to output your site
-
-Next, you need to create a build from this new entry. So, if you're using webpack, use the same build you do for your app, just change the entry to point to this file.
-Run your build. After your build finishes, you need to execute the script:
-
-```
-node path/to/bundled.file.js
-```
-
-That will build your site.
-
+There is a [Demo App](https://github.com/angularclass/universal-sitegen/tree/master/demo) that has the basics. Great place to start to getting your app ready.
 
 #### CLI
-To build your site with the CLI (preffered), you only need to do a few things.
+Make sure you followed the steps above first. To build your site with the CLI (preffered), you only need to do a few things.
 
-Create a config file with these options:
+
+Because your app is never going to be ran in the browser and only node, you might have to adjust your webpack config. Look at the [demo webpack config](https://github.com/angularclass/universal-sitegen/tree/master/demo/webpack.config.js) for what it should look like.
+
+Next, build your app. After you build it, you need to create a `universal.json` file with options on the root of your app.
 
 ```js
 {
@@ -116,28 +111,25 @@ Create a config file with these options:
   ],
   // output folder for your site
   "outputPath": "site", 
-  // path to Server NgModule or NgModuleFactory with the #ExportName of the module
+  // path to the compiled Server NgModule or NgModuleFactory with the #ExportName of the module
   "serverModuleOrFactoryPath": "./dist/bundle#AppServerModule",
   // path to the root html page all pages will be injected into
   "indexHTMLPath": "./src/index.html"
 }
 ```
 
-Create your Server Module:
+After that is all done, add a `script` in your `package.json` to build the static site using the cli:
 
-```typescript
-// server.module.ts
-import { NgModule } from '@angular/core'
-import { ServerModule } from '@angular/platform-server'
-import { App } from './app.component'
-// make sure your AppModule imports the BrowserModule.withServerTransition()
-import { AppModule } from './app.module'
-
-@NgModule({
-  imports: [ServerModule, AppModule],
-  bootstrap: [App]
-})
-
-// notice this export name matches the #{name} in the config.serverModuleOrFactoryPath above
-export class AppServerModule {}
+```json
+{
+  "scripts": {
+    "universal": "universal build"
+  }
+}
 ```
+
+The `universal build` command will build your app as a static site, and output the html files to the outpath you specified in `universal.json`.
+
+
+#### Progmatically
+**comming soon**
