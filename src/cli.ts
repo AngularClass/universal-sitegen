@@ -34,11 +34,11 @@ const getConfig = async (config = './universal.json'): Promise<CLIConfig> => {
 
   try {
     const options = JSON.parse(file)
-    return Object.assign(options, {
+    return Object.assign({}, {
       indexHTMLPath: './src/index.html',
       dotHTML: false,
       outputPath: 'site'
-    })
+    }, options)
   } catch (e) {
     console.error(new Error('Config file has invalid JSON'))
     process.exit(1)
