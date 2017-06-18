@@ -30,19 +30,20 @@ const readFile = (pathToFile: string): Promise<string> => {
  */
 const getConfig = async (config = './universal.json'): Promise<CLIConfig> => {
   const configPath = path.join(process.cwd(), config)
-  const file = await readFile(configPath)
+  let options: any = {}
 
   try {
-    const options = JSON.parse(file)
-    return Object.assign({}, {
-      indexHTMLPath: './src/index.html',
-      dotHTML: false,
-      outputPath: 'site'
-    }, options)
+    options = require(configPath)
   } catch (e) {
-    console.error(new Error('Config file has invalid JSON'))
+    console.error(e)
     process.exit(1)
   }
+
+  return Object.assign({}, {
+    indexHTMLPath: './src/index.html',
+    dotHTML: false,
+    outputPath: 'site'
+  }, options)
 }
 
 /**
@@ -75,7 +76,7 @@ const getModule = (pathToModule: string): Type<{}> | NgModuleFactory<{}> => {
  * @param config commander config
  */
 const build = async (config) => {
-  const configOptions = (await getConfig(config.config) as CLIConfig)
+  const configOptions = (await getConfig(config) as CLIConfig)
   const serverModule = getModule(configOptions.serverModuleOrFactoryPath)
 
   return generateSite(

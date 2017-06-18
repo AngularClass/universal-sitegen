@@ -23,14 +23,16 @@ export const generateSite = async (
       configOptions = JSON.parse(configJSON)
     } catch (e) {
       console.error(chalk.red(e))
-      process.exit(1)
     }
   } else {
     configOptions = (config as SiteGenConfig)
   }
 
-  const pages = configOptions.routes.map((route: string) => {
-    return Observable.fromPromise(renderPage(serverModuleOrFactory, document, route, configOptions))
+  const pages = (configOptions.routes || await configOptions.getRoutes())
+  .map((route: string) => {
+    return Observable.fromPromise(renderPage(
+      serverModuleOrFactory, document, route, configOptions
+    ))
   })
 
   const bar = new progressBar('  univeral building :url [:bar] :percent :total pages', {
