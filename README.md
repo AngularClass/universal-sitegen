@@ -14,7 +14,7 @@
 <!-- /TOC -->
 
 ## What is this?
-Ever wanted to make a static site from your Angular app? Now that we have finalzed Angular Universal, you can! Universal Sitegen takes your angular app, builds it, then spits out static pages for each route. If you're building a website that you don't need a client side JS framework for, then this is pefect. Blogs, ladning pages, sales pages, launch pages, company sites, you get the point.
+Ever wanted to make a static site from your Angular app? Now that we have finalized Angular Universal, you can! Universal Sitegen takes your angular app, builds it, then spits out static pages for each route. If you're building a website that you don't need a client side JS framework for, then this is pefect. Blogs, landing pages, sales pages, launch pages, company sites, you get the point.
 
 
 ## Getting started
