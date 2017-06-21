@@ -1,6 +1,6 @@
 {
   "name": "@angularclass/universal-sitegen",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "An Angular Universal static site generator",
   "main": "universal-sitegen.js",
   "jsnext:main": "index.js",
