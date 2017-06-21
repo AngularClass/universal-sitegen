@@ -2,7 +2,6 @@ import { SiteGenConfig } from './interfaces'
 import * as path from 'path'
 const fs = require('fs-extra')
 
-
 export const createHTML = (html: string, url: string, config: SiteGenConfig) => {
   let filePath = path.join(process.cwd(), config.outputPath)
 

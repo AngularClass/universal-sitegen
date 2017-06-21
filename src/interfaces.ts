@@ -1,5 +1,14 @@
+import { Type, NgModuleFactory } from '@angular/core'
+
 export interface RouteFunc {
   (): Promise<string[]>
+}
+
+export interface RenderPageOpts {
+  serverModuleOrFactory: Type<{}> | NgModuleFactory<{}>
+  document: string
+  url: string
+  config: SiteGenConfig
 }
 
 export interface SiteGenConfig {

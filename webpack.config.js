@@ -12,7 +12,10 @@ module.exports = (envOptions = {}) => {
     entry: root('./src/index.ts'),
     output: {
       path: root('dist'),
-      filename: 'universal-sitegen.js'
+      filename: 'universal-sitegen.js',
+      library: 'universal-sitegen',
+      libraryTarget: 'umd',
+      umdNamedDefine: true
     },
     target: 'node',
 

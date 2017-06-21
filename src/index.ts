@@ -10,6 +10,8 @@ const prettysize = require('prettysize')
 
 enableProdMode()
 
+export { UniversalCache } from './cache'
+
 export const generateSite = async (
   serverModuleOrFactory: Type<{}> | NgModuleFactory<{}>,
   document: string,
@@ -30,9 +32,13 @@ export const generateSite = async (
 
   const pages = (configOptions.routes || await configOptions.getRoutes())
   .map((route: string) => {
-    return Observable.fromPromise(renderPage(
-      serverModuleOrFactory, document, route, configOptions
-    ))
+    return Observable.of({serverModuleOrFactory, document, url: route, configOptions})
+    .mergeMap((opts: any) => Observable.fromPromise(renderPage(
+      opts.serverModuleOrFactory,
+      opts.document,
+      opts.url,
+      opts.config
+    )))
   })
 
   const bar = new progressBar('  univeral building :url [:bar] :percent :total pages', {

@@ -1,17 +1,18 @@
 import 'core-js'
 import 'zone.js/dist/zone-node'
 import { renderModule, renderModuleFactory } from '@angular/platform-server'
-import { NgModuleFactory, enableProdMode, Type } from '@angular/core'
+import { NgModuleFactory, Type, InjectionToken } from '@angular/core'
 import { SiteGenConfig } from './interfaces'
+import { UniversalCache } from './cache'
 
-enableProdMode()
 
+export const CACHE = new InjectionToken('universal.cache')
 /**
  * A thunk that takes a render method and later calls it with module or factory and platform options
- * @param renderMethod what method to render (rednerModule | renderModuleFactory)
+ * @param renderMethod what method to render (renderModule | renderModuleFactory)
  */
 const render = (renderMethod: Function) => {
-  return function(moduleToRender, opts: {document: string, url: string}) {
+  return function(moduleToRender, opts: {document: string, url: string, extraProviders?: any[]}) {
     return renderMethod.call(renderMethod, moduleToRender, opts)
   }
 }
@@ -22,6 +23,7 @@ const render = (renderMethod: Function) => {
  * @param document the index.html string
  * @param url the url to the page
  */
+const cache = {data: []}
 export async function renderPage (
   serverModuleOrFactory: Type<{}> | NgModuleFactory<{}>,
   document: string,
@@ -40,7 +42,11 @@ export async function renderPage (
 
   const html = await renderFunc(
     serverModuleOrFactory,
-    {document, url}
+    {
+      document,
+      url,
+      extraProviders: [UniversalCache]
+    }
   )
 
   return {html, url}
