@@ -23,7 +23,6 @@ const render = (renderMethod: Function) => {
  * @param document the index.html string
  * @param url the url to the page
  */
-const cache = {data: []}
 export async function renderPage (
   serverModuleOrFactory: Type<{}> | NgModuleFactory<{}>,
   document: string,
