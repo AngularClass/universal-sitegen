@@ -7,7 +7,7 @@ import { UniversalCache } from './cache'
 
 
 export const CACHE = new InjectionToken('universal.cache')
-const cache = {}
+export const cache = {}
 /**
  * A thunk that takes a render method and later calls it with module or factory and platform options
  * @param renderMethod what method to render (renderModule | renderModuleFactory)

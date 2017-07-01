@@ -11,7 +11,7 @@ const prettysize = require('prettysize')
 enableProdMode()
 
 export { UniversalCache } from './cache'
-export { CACHE } from './render'
+export { CACHE, cache } from './render'
 
 export const generateSite = async (
   serverModuleOrFactory: Type<{}> | NgModuleFactory<{}>,
