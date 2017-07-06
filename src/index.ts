@@ -6,7 +6,7 @@ import { SiteGenConfig } from './interfaces'
 import { Observable} from 'rxjs'
 const chalk = require('chalk')
 const progressBar = require('progress')
-const prettysize = require('prettysize')
+// const prettysize = require('prettysize')
 
 enableProdMode()
 
@@ -42,19 +42,26 @@ export const generateSite = async (
     )))
   })
 
-  const bar = new progressBar('  univeral building :url [:bar] :percent :total pages', {
+  const bar = new progressBar('   🌍 [:bar] :percent   route /:url', {
     total: pages.length,
-    clear: true,
-    incomplete: ' '
+    complete: '\u001b[42m \u001b[0m',
+    incomplete: ' ',
+    width: 40
   })
 
+  const getUrl = (url: string) => {
+    const bits = url.split('/')
+    return bits.slice(bits.length - 2).join('/')
+  }
+
   Observable.concat(...pages)
-  .do((page) => bar.tick({
-    url: page.url
-  }))
   .do((page) => createHTML(page.html, page.url, configOptions))
   .subscribe((page) => {
-    const bytes = Buffer.byteLength(page.html, 'utf8')
-    console.log(chalk.green(`built ${page.url} ${prettysize(bytes, true)}`))
+    bar.tick({
+      url: !page.url || page.url === '/' ?
+        '/' :
+        getUrl(page.url)
+    })
+    bar.render()
   })
 }

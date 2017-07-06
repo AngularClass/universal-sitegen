@@ -10,8 +10,6 @@ export const createHTML = (html: string, url: string, config: SiteGenConfig) => 
   } else {
     filePath = path.join(filePath, url,  'index.html')
   }
-
-  console.log(filePath)
   return fs.outputFile(filePath, html)
 }
 
