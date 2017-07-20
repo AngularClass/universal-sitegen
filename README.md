@@ -69,26 +69,31 @@ export class AppServerModule {}
 There is a [Demo App](https://github.com/angularclass/universal-sitegen/tree/master/demo) that has the basics. Great place to start to getting your app ready.
 
 #### CLI
-Make sure you followed the steps above first. To build your site with the CLI (preffered), you only need to do a few things.
+Make sure you followed the steps above first. To build your site with the provided CLI (preffered), you only need to do a few things.
 
 
 Because your app is never going to be ran in the browser and only node, you might have to adjust your webpack config. Look at the [demo webpack config](https://github.com/angularclass/universal-sitegen/tree/master/demo/webpack.config.js) for what it should look like.
 
-Next, build your app. After you build it, you need to create a `universal.json` file with options on the root of your app.
+Next, build your app. After you build it, you need to create a `universal.js` file with options on the root of your app.
 
 ```js
-{
-  // routes for your angular app. mirros your routes file
-  "routes": [
+module.exports = {
+  // routes for your angular app. mirrors your routes file
+  routes: [
     "/",
     "/about"
   ],
+  
+  // or getRoutes() for async routes you need to get first.
+  getRoutes() {
+    return someService.getMyRoutes()
+  },
   // output folder for your site
-  "outputPath": "site", 
+  outputPath: "site", 
   // path to the compiled Server NgModule or NgModuleFactory with the #ExportName of the module
-  "serverModuleOrFactoryPath": "./dist/bundle#AppServerModule",
+  serverModuleOrFactoryPath: "./dist/bundle#AppServerModule",
   // path to the root html page all pages will be injected into
-  "indexHTMLPath": "./src/index.html"
+  indexHTMLPath: "./src/index.html"
 }
 ```
 
@@ -102,10 +107,10 @@ After that is all done, add a `script` in your `package.json` to build the stati
 }
 ```
 
-The `universal build` command will build your app as a static site, and output the html files to the outpath you specified in `universal.json`.
+The `universal build` command will build your app as a static site, and output the html files to the outpath you specified in `universal.js`.
 
 
-#### Programmatically
+#### Programmatically (not complete)
 Follow the common steps above first. You need to create an entry file for the site generator:
 
 ```typescript
