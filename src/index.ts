@@ -34,12 +34,11 @@ export const generateSite = async (
   const pages = (configOptions.routes || await configOptions.getRoutes())
   .map((route: string) => {
     return Observable.of({serverModuleOrFactory, document, url: route, configOptions})
-    .mergeMap((opts: any) => Observable.fromPromise(renderPage(
-      opts.serverModuleOrFactory,
-      opts.document,
-      opts.url,
-      opts.config
-    )))
+    .mergeMap((opts: any) => {
+      const promise = renderPage(opts.serverModuleOrFactory, opts.document, opts.url, opts.config)
+        .then
+      return Observable.fromPromise(promise)
+    })
   })
 
   const bar = new progressBar('   🌍 [:bar] :percent   route /:url', {
