@@ -69,7 +69,7 @@ export class AppServerModule {}
 There is a [Demo App](https://github.com/angularclass/universal-sitegen/tree/master/demo) that has the basics. Great place to start to getting your app ready.
 
 #### CLI
-Make sure you followed the steps above first. To build your site with the provided CLI (preffered), you only need to do a few things.
+Make sure you followed the steps above first. To build your site with the provided CLI (preferred), you only need to do a few things.
 
 
 Because your app is never going to be ran in the browser and only node, you might have to adjust your webpack config. Look at the [demo webpack config](https://github.com/angularclass/universal-sitegen/tree/master/demo/webpack.config.js) for what it should look like.
